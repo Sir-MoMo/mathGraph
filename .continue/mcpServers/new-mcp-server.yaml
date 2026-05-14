@@ -1,0 +1,11 @@
+name: New MCP server
+version: 0.0.1
+schema: v1
+mcpServers:
+  - name: mathgraph-tools
+    command: "node" # 既然 node -v 通了，这里直接写 node
+    args:
+      - "E:/你的真实路径/index.js" # 请务必核实这个路径是否存在
+    env:
+      HTTP_PROXY: "http://127.0.0.1:2334"
+      HTTPS_PROXY: "http://127.0.0.1:2334"

@@ -1,0 +1,77 @@
+# This is an example configuration file
+# To learn more, see the full config.yaml reference: https://docs.continue.dev/reference
+
+name: Example Config
+version: 1.0.0
+schema: v1
+
+# Define which models can be used
+# https://docs.continue.dev/customization/models
+# models:
+#   - name: my gpt-5
+#     provider: openai
+#     model: gpt-5
+#     apiKey: YOUR_OPENAI_API_KEY_HERE
+#   - uses: ollama/qwen2.5-coder-7b
+#   - uses: anthropic/claude-4-sonnet
+#     with:
+#       ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+# tabAutocompleteModel:
+#   name: gemini-2.5-pro
+#   provider: gemini
+#   model: gemini-2.5-pro
+#   apiKey: AIzaSyDA8S2xiz3WUc9VS4VhO1LzZWvnVgoS34Q
+
+# # MCP Servers that Continue can access
+# # https://docs.continue.dev/customization/mcp-tools
+# mcpServers:
+#   - uses: anthropic/memory-mcp
+
+models:
+  - name: gemini-2.5-pro
+    provider: gemini
+    model: gemini-2.5-pro
+    apiKey: AIzaSyDA8S2xiz3WUc9VS4VhO1LzZWvnVgoS34Q
+  - name: "Qwen: Qwen3.6 27B"
+    provider: openrouter
+    model: qwen/qwen3.6-27b
+    apiKey: sk-bcc35b058015478c9d4518d59fa9e10c
+  - name: Gemini 3.1 Pro
+    provider: gemini
+    model: gemini-3.1-pro-preview
+    apiKey: AIzaSyDA8S2xiz3WUc9VS4VhO1LzZWvnVgoS34Q
+  - name: qwen2.5-coder 7b
+    provider: ollama
+    model: qwen2.5-coder:7b
+    roles:
+      - apply
+      - autocomplete
+      - chat
+      - edit
+# MCP Servers that Continue can access
+# https://docs.continue.dev/customization/mcp-tools
+tabAutocompleteModel:
+  name: Autocomplete-Flash
+  provider: google
+  model: gemini-1.5-flash-latest
+  apiKey: "AIzaSyDA8S2xiz3WUc9VS4VhO1LzZWvnVgoS34Q"
+
+# 3. 本地工具服务器 (MCP)：让 AI 能调用你的 index.js
+mcpServers:
+  - name: mathgraph-tools
+    command: "node" # 既然 node -v 通了，直接用 node 命令
+    args:
+      - "E:/mathGraph/mcp-server/index.js" # 请务必确认为实际存放路径
+    env:
+      # 为 MCP 进程提供网络代理
+      HTTP_PROXY: "http://127.0.0.1:2334"
+      HTTPS_PROXY: "http://127.0.0.1:2334"
+
+# 4. 全局网络与超时设置
+requestOptions:
+  proxy: "http://127.0.0.1:2334" # 确保指向你的代理端口
+  timeout: 30000
+
+# 5. 补全微调（可选）
+tabAutocompleteOptions:
+  debounceDelay: 500 # 增加延迟，防止网络请求过于频繁导致 400 错误
