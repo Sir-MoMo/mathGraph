@@ -31,7 +31,7 @@ models:
   - name: gemini-2.5-pro
     provider: gemini
     model: gemini-2.5-pro
-    apiKey: AIzaSyDA8S2xiz3WUc9VS4VhO1LzZWvnVgoS34Q
+    apiKey: AIzaSyAlbyApFlhTUab-yoPMnAObwbIWMWVwRDA
   - name: "Qwen: Qwen3.6 27B"
     provider: openrouter
     model: qwen/qwen3.6-27b
@@ -39,7 +39,7 @@ models:
   - name: Gemini 3.1 Pro
     provider: gemini
     model: gemini-3.1-pro-preview
-    apiKey: AIzaSyDA8S2xiz3WUc9VS4VhO1LzZWvnVgoS34Q
+    apiKey: AIzaSyAlbyApFlhTUab-yoPMnAObwbIWMWVwRDA
   - name: qwen2.5-coder 7b
     provider: ollama
     model: qwen2.5-coder:7b
@@ -54,7 +54,7 @@ tabAutocompleteModel:
   name: Autocomplete-Flash
   provider: google
   model: gemini-1.5-flash-latest
-  apiKey: "AIzaSyDA8S2xiz3WUc9VS4VhO1LzZWvnVgoS34Q"
+  apiKey: "AIzaSyAlbyApFlhTUab-yoPMnAObwbIWMWVwRDA"
 
 # 3. 本地工具服务器 (MCP)：让 AI 能调用你的 index.js
 mcpServers:

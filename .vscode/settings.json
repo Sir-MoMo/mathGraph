@@ -20,5 +20,5 @@
     "python.analysis.autoImportCompletions": true,
     "continue.pauseTabAutocompleteOnBattery": true,
     "python.autoComplete.extraPaths": [],
-    "python-envs.defaultEnvManager": "ms-python.python:system"
+    "python-envs.defaultEnvManager": "ms-python.python:venv"
 }
