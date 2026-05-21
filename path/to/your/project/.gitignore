@@ -1,0 +1,40 @@
+# 这是一个注释行
+
+# 字节码和缓存文件
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# 虚拟环境
+venv/
+.venv/
+env/
+.env/
+venv.bak/
+
+# 操作系统生成的文件
+.DS_Store
+Thumbs.db
+
+# IDE 和编辑器配置文件
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+
+# 日志和数据库文件
+*.log
+*.sqlite3
+*.db
+
+# 本地配置文件 (通常包含敏感信息)
+.env
+config.ini
+secrets.yml
+.continue/agents/aikey.yaml
+
+# 测试和覆盖率报告
+.pytest_cache/
+htmlcov/
+.coverage
