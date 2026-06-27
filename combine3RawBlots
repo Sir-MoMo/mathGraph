@@ -1,0 +1,73 @@
+from PIL import Image
+import os
+
+def combine_3_raw_blots_vertical_tight():
+    # --- 1. 路径设置 ---
+    base_path = r"D:\reDraw\JYSZrawBlots"
+    
+    # 自动获取该文件夹下的所有图片文件
+    valid_extensions = ('.png', '.jpg', '.jpeg', '.tif', '.tiff')
+    all_files = sorted([os.path.join(base_path, f) for f in os.listdir(base_path) 
+                 if f.lower().endswith(valid_extensions)])
+    
+    num_imgs = len(all_files)
+    if num_imgs < 3:
+        print(f"错误: 在 {base_path} 中找到的图片不足 3 张！请检查路径。")
+        return
+        
+    img_files = all_files[:3]
+    output_path = os.path.join(base_path, "Supplementary_Raw_Blots_3x1_Vertical_Tight.tiff")
+
+    # --- 2. 尺寸与排版设定 ---
+    target_cell_w = 1500  # 统一缩放目标宽度
+    
+    # --- 3. 图像处理与无损缩放 ---
+    processed_imgs = []
+    total_img_h = 0  
+    
+    for img_path in img_files:
+        img = Image.open(img_path).convert("RGB")
+        w, h = img.size
+        
+        # 保持原始比例计算新高度
+        aspect_ratio = h / w
+        new_h = int(target_cell_w * aspect_ratio)
+        img_resized = img.resize((target_cell_w, new_h), Image.Resampling.LANCZOS)
+        processed_imgs.append(img_resized)
+        
+        # 累加高度
+        total_img_h += new_h
+
+    # --- 4. 动态画布计算 (减小了行间距) ---
+    margin_x = 150    # 左右外边距保持不变
+    margin_y = 150    # 上下外边距保持不变
+    gap_y = 75        # 将行间距从 150 减半至 75
+    
+    # 画布总宽
+    canvas_w = margin_x * 2 + target_cell_w
+    # 画布总高
+    canvas_h = margin_y * 2 + total_img_h + gap_y * (len(processed_imgs) - 1)
+    
+    combined = Image.new("RGB", (canvas_w, canvas_h), "white")
+
+    # --- 5. 坐标计算与上下粘贴 ---
+    current_y = margin_y  
+    
+    for img in processed_imgs:
+        x = margin_x
+        combined.paste(img, (x, current_y))
+        
+        # 更新下一张图片的 Y 坐标
+        current_y += img.height + gap_y
+
+    # --- 6. 导出高清图片 ---
+    combined.save(output_path, format="TIFF", compression="tiff_lzw", dpi=(300, 300))
+    
+    print("-" * 40)
+    print("3格原始条带图（紧凑纵向版）拼接成功！")
+    print(f"纵向间距已减半为 75 像素。")
+    print(f"输出文件路径: {output_path}")
+    print("-" * 40)
+
+if __name__ == "__main__":
+    combine_3_raw_blots_vertical_tight()
