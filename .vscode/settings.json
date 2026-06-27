@@ -1,12 +1,5 @@
 {
     "git.ignoreLimitWarning": true,
-    "python-envs.pythonProjects": [
-        {
-            "path": "check_gemini_models.py",
-            "envManager": "ms-python.python:venv",
-            "packageManager": "ms-python.python:pip"
-        }
-    ],
     "python.testing.pytestArgs": [
         "."
     ],
